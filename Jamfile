@@ -1,0 +1,10 @@
+import testing ;
+
+lib test_lib : library.cpp : : <link>static ;
+
+project : requirements <library>test_lib ;
+
+test-suite inline-namespace-tests :
+	[ run test_abi_v0.cpp ]
+	[ run test_abi_v1.cpp ]
+;
