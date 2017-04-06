@@ -59,10 +59,7 @@ clients were built against the old header:
 .. code:: c++
 
 	namespace test {
-	int test_function() { return 0; }
-	inline namespace v1 {
-		int test_function() { return 1; }
-	}
+		int test_function();
 	}
 
 And when linked will refer to the old name (``test::test_function``). Whereas
