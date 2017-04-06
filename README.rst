@@ -44,23 +44,37 @@ always have.
 
 inline namespaces were introduced in C++11 which lets us do this. For example:
 
-.. include:: library.cpp
-	:code: c++
-	:tab-width: 2
+.. code:: c++
+
+	namespace test {
+	int test_function() { return 0; }
+	inline namespace v1 {
+		int test_function() { return 1; }
+	}
+	}
 
 This defines two functions, one with the old name and one with the new name. Old
 clients were built against the old header:
 
-.. include:: v0.hpp
-	:code: c++
-	:tab-width: 2
+.. code:: c++
+
+	namespace test {
+	int test_function() { return 0; }
+	inline namespace v1 {
+		int test_function() { return 1; }
+	}
+	}
 
 And when linked will refer to the old name (``test::test_function``). Whereas
 new clients will be built against the new header:
 
-.. include:: v1.hpp
-	:code: c++
-	:tab-width: 2
+.. code:: c++
+
+	namespace test {
+	inline namespace v1 {
+		int test_function();
+	}
+	}
 
 And will refer to the new name when linked. The new name being ``test::v1::test_function``.
 
